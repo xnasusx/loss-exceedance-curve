@@ -464,7 +464,9 @@
 
     const anchors={tolerance,reserve,materiality,custom};
 
-    return h('div',{style:{minHeight:"100vh",background:C.bg,color:C.text}},
+    // 100vh inside the iframe is the frame's own height, which pins the page to
+    // whatever height the parent last set and leaves dead space under the content.
+    return h('div',{style:{minHeight:EMBEDDED?0:"100vh",background:C.bg,color:C.text}},
 
       // ======== ACT 1 ========
       !EMBEDDED&&h('div',{style:{maxWidth:1400,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
