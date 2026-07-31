@@ -203,7 +203,9 @@
     const svgRef=useRef(null);
     const[cw,setCw]=useState(600);
     const[hover,setHover]=useState(null); // {x, y, loss, prob}
-    useEffect(()=>{if(!ref.current)return;const o=new ResizeObserver(e=>{for(const x of e)setCw(x.contentRect.width);});o.observe(ref.current);return()=>o.disconnect();},[]);
+    // ResizeObserver does not deliver in every embedding context, so measure the
+    // container directly on mount and lean on the resize event the iframe fires.
+    useEffect(()=>{const el=ref.current;if(!el)return;const measure=()=>{const cwv=el.getBoundingClientRect().width;if(cwv>0)setCw(cwv);};measure();const raf=requestAnimationFrame(measure);const o=typeof ResizeObserver!=="undefined"?new ResizeObserver(measure):null;if(o)o.observe(el);window.addEventListener("resize",measure);return()=>{cancelAnimationFrame(raf);window.removeEventListener("resize",measure);if(o)o.disconnect();};},[]);
     if(!lecData||!lecData.length)return null;
 
     const mg={top:40,right:mb?12:24,bottom:mb?52:56,left:mb?52:64};
@@ -336,7 +338,9 @@
   function HistogramChart({results,isMobile:mb}){
     const ref=useRef(null);
     const[cw,setCw]=useState(600);
-    useEffect(()=>{if(!ref.current)return;const o=new ResizeObserver(e=>{for(const x of e)setCw(x.contentRect.width);});o.observe(ref.current);return()=>o.disconnect();},[]);
+    // ResizeObserver does not deliver in every embedding context, so measure the
+    // container directly on mount and lean on the resize event the iframe fires.
+    useEffect(()=>{const el=ref.current;if(!el)return;const measure=()=>{const cwv=el.getBoundingClientRect().width;if(cwv>0)setCw(cwv);};measure();const raf=requestAnimationFrame(measure);const o=typeof ResizeObserver!=="undefined"?new ResizeObserver(measure):null;if(o)o.observe(el);window.addEventListener("resize",measure);return()=>{cancelAnimationFrame(raf);window.removeEventListener("resize",measure);if(o)o.disconnect();};},[]);
     if(!results)return null;
 
     const nonZero=Array.from(results).filter(v=>v>0);
