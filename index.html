@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How to Read a Loss Exceedance Curve: An Interactive Guide</title>
-  <meta name="description" content="Learn to read the most useful chart in cyber risk quantification. Build a loss exceedance curve from scratch and overlay risk tolerance, loss reserves, and materiality thresholds. A companion tool for From Heatmaps to Histograms by Tony Martin-Vegue." />
-  <meta name="author" content="Tony Martin-Vegue" />
+  <meta name="description" content="Learn to read the most useful chart in cyber risk quantification. Build a loss exceedance curve from scratch and overlay risk tolerance, loss reserves, and materiality thresholds. A training exercise by Susan Shepard." />
+  <meta name="author" content="Susan Shepard" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="How to Read a Loss Exceedance Curve: An Interactive Guide" />
   <meta property="og:description" content="The most useful chart in risk quantification, explained step by step. Build one, add your own thresholds, and see what the curve is telling you." />
-  <meta property="og:site_name" content="From Heatmaps to Histograms" />
+  <meta property="og:site_name" content="Susan Shepard · Risk Lab" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="How to Read a Loss Exceedance Curve" />
@@ -143,34 +143,6 @@
   // ============================================================
   // SHARED COMPONENTS
   // ============================================================
-  function Header({isMobile:mb}){
-    return h('div',{style:{position:"sticky",top:0,zIndex:20,borderBottom:"1px solid rgba(58,51,54,0.08)",background:"rgba(247,235,237,0.88)",backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",padding:mb?"12px 0":"16px 0"}},
-      h('div',{style:{maxWidth:1100,margin:"0 auto",padding:mb?"0 16px":"0 24px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}},
-        h('div',null,
-          h('a',{href:"https://www.heatmapstohistograms.com/",style:{textDecoration:"none"}},
-            h('div',{style:{fontFamily:mono,fontSize:mb?10:11,letterSpacing:"0.15em",color:C.accent,textTransform:"uppercase",marginBottom:2}},"From Heatmaps to Histograms")),
-          h('div',{style:{fontFamily:mono,fontSize:mb?10:11,color:C.textDim}},"\u00B7 Interactive Tools \u00B7 Tony Martin-Vegue")),
-        h('div',{style:{display:"flex",alignItems:"center",gap:20,fontFamily:mono,fontSize:11,color:C.textDim}},
-          h('a',{href:"https://www.heatmapstohistograms.com/downloads",style:{color:C.accent,textDecoration:"none",background:C.chipBg,border:"1px solid rgba(199,132,141,0.4)",borderRadius:999,padding:"6px 14px",fontWeight:600,fontSize:11,fontFamily:mono}},"More Tools"),
-          !mb&&h('a',{href:"https://www.heatmapstohistograms.com/",style:{color:C.textDim,textDecoration:"none"}},"Book"),
-          !mb&&h('a',{href:"https://newsletter.heatmapstohistograms.com/",style:{color:C.textDim,textDecoration:"none"}},"Newsletter"),
-          !mb&&h('a',{href:"https://www.95risk.com",style:{color:C.textDim,textDecoration:"none"}},"95 Risk Advisory"))));
-  }
-
-  function Footer({isMobile:mb}){
-    const ls={color:C.textMuted,textDecoration:"none"};
-    return h('div',{style:{borderTop:"1px solid "+C.border,padding:"28px 0",marginTop:64}},
-      h('div',{style:{maxWidth:1100,margin:"0 auto",padding:mb?"0 16px":"0 24px",display:"flex",flexDirection:mb?"column":"row",justifyContent:"space-between",alignItems:mb?"center":"flex-start",gap:mb?16:0}},
-        h('div',{style:{textAlign:mb?"center":"left"}},
-          h('div',{style:{fontFamily:mono,fontSize:11,color:C.accent,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:4}},"From Heatmaps to Histograms"),
-          h('div',{style:{fontFamily:mono,fontSize:11,color:C.textDim}},"Tony Martin-Vegue \u00B7 Apress")),
-        h('div',{style:{display:"flex",alignItems:"center",gap:mb?20:24,fontFamily:mono,fontSize:11}},
-          h('a',{href:"https://www.heatmapstohistograms.com/downloads",style:{color:C.accent,textDecoration:"none",background:C.chipBg,border:"1px solid rgba(199,132,141,0.4)",borderRadius:999,padding:"6px 14px",fontWeight:600}},"More Tools"),
-          h('a',{href:"https://www.amazon.com/Heatmaps-Histograms-Practical-Guide-Quantification/dp/B0FX7V3J7D",style:ls},"Order"),
-          h('a',{href:"https://newsletter.heatmapstohistograms.com/",style:ls},"Newsletter"),
-          h('a',{href:"https://www.heatmapstohistograms.com/",style:ls},"Book Site"),
-          h('a',{href:"https://www.95risk.com",style:ls},"Consulting"))));
-  }
 
   function SLabel({n,label,color}){
     return h('div',{style:{display:"flex",alignItems:"center",gap:12,marginBottom:20}},
@@ -484,10 +456,9 @@
     const anchors={tolerance,reserve,materiality,custom};
 
     return h('div',{style:{minHeight:"100vh",background:C.bg,color:C.text}},
-      h(Header,{isMobile:mb}),
 
       // ======== ACT 1 ========
-      h('div',{style:{maxWidth:1100,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
+      h('div',{style:{maxWidth:1400,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
         h(SLabel,{n:"1",label:"The Lesson",color:C.danger}),
         h('h1',{style:{fontFamily:display,fontSize:mb?32:52,fontWeight:700,lineHeight:1.05,letterSpacing:"-0.02em",marginBottom:24,maxWidth:760,color:C.text}},
           "How to Read a ",h('em',{style:{fontStyle:"italic",color:C.accent}},"Loss Exceedance Curve")),
@@ -498,7 +469,7 @@
             "Reading it is simple: pick any dollar amount on the horizontal axis, look up to the curve, then read across to the vertical axis. That number is the probability that annual losses from this risk will meet or exceed that amount. Once you can read this chart, you can have a real conversation about risk tolerance, loss reserves, and how much exposure your organization carries."))),
 
       // ======== ACT 2 ========
-      h('div',{style:{maxWidth:1100,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
+      h('div',{style:{maxWidth:1400,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
         h(SLabel,{n:"2",label:"The Tool"}),
 
         // STEP 1
@@ -597,7 +568,7 @@
             }},"\u2190 Back to Histogram")))),
 
       // ======== ACT 3 ========
-      h('div',{style:{maxWidth:1100,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
+      h('div',{style:{maxWidth:1400,margin:"0 auto",padding:(mb?32:48)+"px "+pd+"px 0"}},
         h(SLabel,{n:"3",label:"The Takeaway",color:C.success}),
         h('div',{style:{maxWidth:680,fontFamily:serif,fontSize:mb?15:16,lineHeight:1.75,color:C.textMuted}},
           h('p',{style:{marginBottom:16}},
@@ -607,21 +578,7 @@
           h('p',null,
             "The curve is built from the same Monte Carlo simulation you saw in the histogram. No new math is required, just a different way of reading the same output. Once you have it, every dollar threshold your organization cares about can be plotted on it, and every stakeholder can read the answer they need.")),
 
-        h('div',{style:{display:"flex",gap:12,marginTop:32,flexWrap:"wrap",fontFamily:mono,fontSize:12}},
-          h('a',{href:"https://www.heatmapstohistograms.com/downloads",style:{display:"inline-flex",alignItems:"center",minHeight:44,padding:"10px 18px",borderRadius:8,background:"transparent",color:C.text,border:"1px solid "+C.text,background:C.text,color:C.bg,textDecoration:"none",fontWeight:600}},"More Tools"),
-          h('a',{href:"https://www.amazon.com/Heatmaps-Histograms-Practical-Guide-Quantification/dp/B0FX7V3J7D",style:{display:"inline-flex",alignItems:"center",minHeight:44,padding:"10px 18px",borderRadius:8,background:"transparent",color:C.text,border:"1px solid "+C.borderLight,textDecoration:"none",fontWeight:600}},"Order the Book"),
-          h('a',{href:"https://newsletter.heatmapstohistograms.com/",style:{display:"inline-flex",alignItems:"center",minHeight:44,padding:"10px 18px",borderRadius:8,background:"transparent",color:C.text,border:"1px solid "+C.borderLight,textDecoration:"none",fontWeight:600}},"Newsletter"))),
-
-      // Disclaimer
-      h('div',{style:{maxWidth:1100,margin:"0 auto",padding:"32px "+pd+"px 0"}},
-        h('div',{style:{background:C.bgAlt,border:"1px solid "+C.borderLight,borderRadius:16,padding:"16px 20px",fontFamily:mono,fontSize:12,color:C.textDim,lineHeight:1.65}},
-          h('span',{style:{color:C.accent,fontWeight:600}},"A NOTE ON THIS TOOL. "),
-          "This is a teaching demo, not a production risk model. The pre-loaded values represent a risk that hits a few times a year with seven-figure consequences, not industry benchmarks. ",
-          "The simulation uses PERT distributions, which have hard upper bounds; real cyber losses often follow fat-tailed distributions (lognormal, log-logistic) where the maximum is not capped, so this tool structurally underestimates tail risk. ",
-          "10,000 iterations is sufficient for learning; production models typically run 50,000\u2013100,000 for more stable tail estimates. ",
-          "Dollar inputs accept shorthand: 500K, 5M, 1.5B.")),
-
-      h(Footer,{isMobile:mb}));
+        h('div',{style:{height:mb?32:56}})));
   }
 
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));
