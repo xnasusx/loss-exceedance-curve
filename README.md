@@ -7,6 +7,8 @@ straight off the axis.
 
 **Live:** https://xnasusx.github.io/loss-exceedance-curve/
 
+![A loss exceedance curve with loss reserve, risk tolerance, and materiality thresholds plotted on it, each labelled with the probability of exceeding that dollar amount](preview.png)
+
 ## What it does
 
 1. **Define a risk** — three-point estimates (min / most likely / max) for how
@@ -58,3 +60,7 @@ This is a teaching demo, not a production risk model. PERT distributions have
 hard upper bounds, while real cyber losses tend to be fat-tailed — so the tool
 structurally underestimates tail risk. 10,000 iterations is fine for learning;
 production models typically run 50,000–100,000 for stable tail estimates.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
